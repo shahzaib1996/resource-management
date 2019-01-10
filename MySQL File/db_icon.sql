@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 16, 2018 at 02:08 PM
+-- Generation Time: Jan 10, 2019 at 09:17 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -29,9 +29,10 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `attachments` (
-  `aid` int(11) NOT NULL,
-  `filename` varchar(500) NOT NULL,
-  `filepath` varchar(500) NOT NULL
+  `aid` int(10) UNSIGNED NOT NULL,
+  `filename` varchar(255) DEFAULT NULL,
+  `filepath` varchar(1000) DEFAULT NULL,
+  `contents` varchar(60000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -56,6 +57,13 @@ CREATE TABLE `tab_resources` (
   `created_date` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tab_resources`
+--
+
+INSERT INTO `tab_resources` (`id`, `level`, `subject`, `course`, `module`, `module_title`, `lesson`, `lesson_title`, `main_idea`, `vocabulary`, `key_concept`, `attachments`, `created_date`) VALUES
+(1, 'kindergarten', 'english', 'adad', 'ada', 'asdasd', 'asdsad', 'asdsad', 'sad', 'asdasd', 'asda', '1,', '2019-01-10 21:08:35');
+
 -- --------------------------------------------------------
 
 --
@@ -75,8 +83,8 @@ CREATE TABLE `tab_users` (
 --
 
 INSERT INTO `tab_users` (`id`, `username`, `password`, `email`, `type`) VALUES
-(1, 'iconadmin', 'temppass*123', 'admin@iconeducate.com', '1'),
-(2, 'user', 'user', 'user@iconeducate.com', '0');
+(1, 'iconadmin', 'admin', 'admin@iconeducate.com', '1'),
+(3, 'user', 'user', 'user@user.com', '0');
 
 --
 -- Indexes for dumped tables
@@ -87,6 +95,7 @@ INSERT INTO `tab_users` (`id`, `username`, `password`, `email`, `type`) VALUES
 --
 ALTER TABLE `attachments`
   ADD PRIMARY KEY (`aid`);
+ALTER TABLE `attachments` ADD FULLTEXT KEY `search_index` (`contents`);
 
 --
 -- Indexes for table `tab_resources`
@@ -109,19 +118,19 @@ ALTER TABLE `tab_users`
 -- AUTO_INCREMENT for table `attachments`
 --
 ALTER TABLE `attachments`
-  MODIFY `aid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `aid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tab_resources`
 --
 ALTER TABLE `tab_resources`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tab_users`
 --
 ALTER TABLE `tab_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
